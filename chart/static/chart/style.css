@@ -1,13 +1,19 @@
-.chart-container {
-    max-width: 500px;
+@media only screen and (max-width: 600px) {
+    #chart {
+      width: 500px;
+    }
+
+    #filter {
+        width: 500px;
+    }
 }
 
 #chart {
-    width: 100%;
+    width: 100vw;
     height: 400px;
 }
 
 #filter {
-    width: 100%;
+    width: 100vw;
     height: 50px;
 }
