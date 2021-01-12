@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from chart import views
-from api.views import TemperatureViewSet
+from api.views import TemperatureViewSet, NumericsViewSet
 
 router = routers.DefaultRouter()
 router.register(r'temps', TemperatureViewSet)
+router.register(r'numerics', NumericsViewSet, basename='numerics')
 
 urlpatterns = [
     path('', views.index, name='index'),
