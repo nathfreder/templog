@@ -27,7 +27,7 @@ async function generateDataTable() {
     // map over rows and reformat for data table
     const rows = data.map(function (temp) {
         // [parsed date, temp celsius float]
-        return [new Date(temp.date), temp.temperature_c];
+        return [new Date(temp.date), temp.temperature];
     });
 
     // add rows to data table
