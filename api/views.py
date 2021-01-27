@@ -1,6 +1,7 @@
 from api.models import Temperature
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.decorators import action
 from .serializers import TemperatureSerializer
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
@@ -24,6 +25,12 @@ class TemperatureViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = TemperatureFilter
+
+    @action(detail=False, methods=['get'], name='Get Latest Temperature')
+    def latest(self, request):
+        latest = Temperature.objects.latest('id')
+        serializer = self.get_serializer(latest)
+        return Response(serializer.data)
 
 
 class NumericsViewSet(viewsets.ViewSet):
