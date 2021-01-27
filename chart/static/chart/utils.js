@@ -26,7 +26,7 @@ function getBeforeAfter(select) {
             after = daysAgo(14);
             break;
         case 'month':
-            after = daysAgo(1);
+            after = daysAgo(30);
             break;
     }
     return { before, after }
