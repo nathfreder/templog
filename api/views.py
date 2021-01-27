@@ -3,6 +3,16 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import TemperatureSerializer
 from rest_framework.response import Response
+from django_filters import rest_framework as filters
+from django_filters import DateTimeFromToRangeFilter
+
+
+class TemperatureFilter(filters.FilterSet):
+    date = DateTimeFromToRangeFilter()
+
+    class Meta:
+        model = Temperature
+        fields = ['date']
 
 
 class TemperatureViewSet(viewsets.ModelViewSet):
@@ -12,12 +22,15 @@ class TemperatureViewSet(viewsets.ModelViewSet):
     queryset = Temperature.objects.all().order_by('date')
     serializer_class = TemperatureSerializer
     permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = TemperatureFilter
 
 
 class NumericsViewSet(viewsets.ViewSet):
     """
     API endpoint that returns Numerics Custom JSON.
     """
+
     def list(self, request):
         queryset = Temperature.objects.all().order_by('-date')
         temperature1 = queryset[0].temperature
