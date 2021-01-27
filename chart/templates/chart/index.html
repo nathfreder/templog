@@ -5,6 +5,13 @@
     <p>
         The current temperature is {{ temperature }}ºC
     </p>
+    <select id="date-range">
+        <option value="day">Last day</option>
+        <option value="week">Last week</option>
+        <option value="2weeks">Last 2 weeks</option>
+        <option value="month">Last month</option>
+        <option value="forever">Forever</option>
+    </select>
     <div id="chart"></div>
     <p>Inspired by <a href="https://himbeersthermometer.glitch.me/">https://himbeersthermometer.glitch.me/</a></p>
 {% endblock %}
