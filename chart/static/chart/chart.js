@@ -1,4 +1,4 @@
-google.charts.load('current', {packages: ['corechart', 'line', 'controls']})
+google.charts.load('current', {packages: ['corechart', 'line']})
     .then(drawDashboard);
 
 /**
@@ -58,23 +58,11 @@ async function drawDashboard() {
     // get data table
     const data = await generateDataTable();
 
-    // init dashboard
-    const dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
-
-    // create a chart range slider
-    const tempDateFilter = new google.visualization.ControlWrapper({
-        controlType: 'ChartRangeFilter',
-        containerId: 'filter',
-        options: {
-            filterColumnIndex: 0
-        }
-    });
-
     // create line chart
-    const lineChart = new google.visualization.ChartWrapper({
-        chartType: 'LineChart',
-        containerId: 'chart',
-        options: {
+    const chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+    // render chart and filter
+    chart.draw(data, {
             hAxis: {
                 title: 'Date'
             },
@@ -85,12 +73,5 @@ async function drawDashboard() {
             legend: {
                 position: 'none'
             }
-        }
     });
-
-    // bind everything together
-    dashboard.bind(tempDateFilter, lineChart);
-
-    // render chart and filter
-    dashboard.draw(data);
 }
