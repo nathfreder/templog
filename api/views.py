@@ -6,6 +6,7 @@ from .serializers import TemperatureSerializer
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
 from django_filters import DateTimeFromToRangeFilter
+from api.utils import round_temperature
 
 
 class TemperatureFilter(filters.FilterSet):
@@ -40,8 +41,8 @@ class NumericsViewSet(viewsets.ViewSet):
 
     def list(self, request):
         queryset = Temperature.objects.all().order_by('-date')
-        temperature1 = queryset[0].temperature
-        temperature2 = queryset[1].temperature
+        temperature1 = round_temperature(queryset[0].temperature)
+        temperature2 = round_temperature(queryset[1].temperature)
         color = 'red'
         if temperature1 >= temperature2:
             color = 'green'

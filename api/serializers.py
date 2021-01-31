@@ -1,13 +1,6 @@
 from rest_framework import serializers
 from .models import Temperature
-
-
-def round_temperature(temperature):
-    """
-    Round temperature to ones place
-    :rtype: int
-    """
-    return round(temperature)
+from .utils import round_temperature
 
 
 class TemperatureField(serializers.Field):
