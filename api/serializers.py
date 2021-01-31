@@ -27,4 +27,4 @@ class TemperatureSerializer(serializers.ModelSerializer):
         fields = ['id', 'temperature', 'temperature_f', 'date']
 
     def get_temperature_f(self, obj):
-        return round_temperature((obj.temperature * 1.8) + 32)
+        return round_temperature((round_temperature(obj.temperature) * 1.8) + 32)
